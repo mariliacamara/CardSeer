@@ -9,6 +9,5 @@ export class UpdateBinDto {
   issuerWebsite: string
   countryName: string
   countryAlpha2: string
-
   countryAlpha3: string
 }

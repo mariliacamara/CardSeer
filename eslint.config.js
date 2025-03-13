@@ -28,11 +28,7 @@ const config = [
     rules: {
       ...js.configs.recommended.rules,
       ...ts.configs.recommended.rules,
-      ...prettier.configs.recommended.rules,
-      // Disable the strict property initialization check globally
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/strict-boolean-expressions': 'off',
-      '@typescript-eslint/strict-property-initialization': 'off' // Disable the strict initialization rule
+      ...prettier.configs.recommended.rules
     }
   },
   {

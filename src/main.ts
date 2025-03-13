@@ -1,15 +1,22 @@
 import { NestFactory } from '@nestjs/core'
-
 import { AppModule } from './app.module.js'
-
 import { env } from './config/env.js'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
-const app = await NestFactory.create(AppModule, {
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
-    credentials: true
-  }
-})
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule)
+  app.enableCors()
 
-await app.listen(env.PORT, '0.0.0.0')
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle(env.APP_NAME)
+    .setDescription(env.APP_DESCRIPTION)
+    .setVersion('1.0')
+    .build()
+
+  const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig)
+  SwaggerModule.setup('api', app, swaggerDocument)
+
+  await app.listen(env.APP_PORT, '0.0.0.0')
+}
+
+bootstrap()
